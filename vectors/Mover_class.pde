@@ -4,9 +4,13 @@ class Mover{
   PVector acceleration;
   boolean brake;
   float topspeed;
+  float x;
+  float y;
   
-  Mover(){
-    location = new PVector(width/2, height/2);
+  Mover(float posX, float posY){
+    x = posX;
+    y = posY;
+    location = new PVector(x,y);
     velocity = new PVector(0,0);
     acceleration = new PVector(-0.001, 0.01);
     brake = true;
@@ -16,15 +20,18 @@ class Mover{
   
   
   void update(){
-    
+    //compute direction
     PVector mouse = new PVector(mouseX, mouseY);
     PVector dir = PVector.sub(mouse, location);
-    dir.normalize();
-    dir.mult(0.5);
-    acceleration = dir;
+    
+    dir.normalize();  //normalize direction (so it does not have length)
+    dir.mult(0.3);   // scale the direction so it becomes an acceleration
+    acceleration = dir;   //rename to acceleration
     velocity.add(acceleration);
     velocity.limit(topspeed);
     location.add(velocity);
+ 
+    
     
   }
   

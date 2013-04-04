@@ -1,4 +1,7 @@
-Mover mover;
+
+int numMovers = 29;
+Mover[] movers = new Mover[numMovers];
+
 
 boolean brake;
 
@@ -6,15 +9,21 @@ boolean brake;
 
 void setup(){
   size(640, 360);
-  mover = new Mover();
+  for(int i = 0; i< movers.length; i++){
+    float x = random(width);
+    float y = random(height);
+  movers[i] = new Mover(x, y);
+  }
 }
 
 void draw(){
   background(255);
   
- mover.update();
- mover.checkEdges();
- mover.display();
+ for(int i = 0; i < movers.length; i++){
+ movers[i].update();
+ movers[i].checkEdges();
+ movers[i].display();
+ }
   
 }
 
