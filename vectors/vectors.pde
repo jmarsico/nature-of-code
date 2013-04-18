@@ -1,31 +1,30 @@
 
 int numMovers = 29;
-Mover[] movers = new Mover[numMovers];
+Mover mover;
 
 
 boolean brake;
+PVector wind;
 
-
-
-void setup(){
+void setup() {
   size(640, 360);
-  for(int i = 0; i< movers.length; i++){
-    float x = random(width);
-    float y = random(height);
-  movers[i] = new Mover(x, y);
+ mover = new Mover(width/2, height/2);
   }
-}
 
-void draw(){
+
+void draw() {
+  
   background(255);
-  
- for(int i = 0; i < movers.length; i++){
- movers[i].update();
- movers[i].checkEdges();
- movers[i].display();
+ 
+ if(mousePressed){
+   PVector wind = new PVector(0.5,0);
+   mover.applyForce(wind);
  }
-  
-}
 
+ 
+ 
+  mover.update();
+  mover.display();
+}
 
 
