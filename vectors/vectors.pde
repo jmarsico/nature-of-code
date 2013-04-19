@@ -1,30 +1,45 @@
+int numMovers = 100;
 
-int numMovers = 29;
-Mover mover;
+Mover[] movers = new Mover[numMovers];
 
-
-boolean brake;
 PVector wind;
+
 
 void setup() {
   size(640, 360);
- mover = new Mover(width/2, height/2);
+  for (int i = 0; i < movers.length; i ++) {
+    movers[i] = new Mover(random(1, 5), random(0, width-1), 0);
   }
+}
 
 
 void draw() {
+
+  background(255);  
   
-  background(255);
- 
- if(mousePressed){
-   PVector wind = new PVector(0.5,0);
-   mover.applyForce(wind);
- }
+  //apply forces to objects
+  for (int i = 0; i < movers.length; i++) {
+    PVector wind = new PVector(0.01, 0);
+    float m = movers[i].mass;
+    PVector gravity = new PVector(0, 0.1*m);
+   
 
- 
- 
-  mover.update();
-  mover.display();
-}
+    //this is the coefficient of friction; lower c = less friction
+    float c = 0.05;
 
+    // friction = -1*direction of velocity*"coefficient of friection"
+    PVector friction = movers[i].velocity.get();
+    friction.normalize();
+    friction.mult(-1);
+    friction.mult(c);
+   
+    
+    movers[i].applyForce(friction);
+    movers[i].applyForce(wind);
+    movers[i].applyForce(gravity);    
+    movers[i].update();
+    movers[i].display();
+    movers[i].checkEdges();
+  }
+  }
 
