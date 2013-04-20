@@ -31,7 +31,7 @@ class Mover {
   void display() {
     stroke(0);
     fill(134, 201, 30, 150);
-    ellipse(location.x, location.y, mass*16, mass*16);
+    ellipse(location.x, location.y, mass, mass);
   }
 
   void checkEdges() {
