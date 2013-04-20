@@ -1,4 +1,4 @@
-int numMovers = 10;
+int numMovers = 20;
 
 
 Mover[] movers = new Mover[numMovers];
@@ -9,7 +9,7 @@ Liquid liquid;
 
 
 void setup() {
-  size(800, 200);
+  size(800, 400);
   reset();
   liquid = new Liquid(0, height/2, width, height/2, 0.1);
   
@@ -46,7 +46,7 @@ void mousePressed() {
 
 void reset() {
   for (int i = 0; i < movers.length; i++) {
-    movers[i] = new Mover(random(0.5, 3), random(width), 0);
+    movers[i] = new Mover(random(0.5, 3), random(width), random(0, 100));
   }
 }
 
