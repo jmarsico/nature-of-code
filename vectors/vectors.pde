@@ -1,34 +1,37 @@
 int numMovers = 20;
 
 
-Mover m;
+Mover[] movers = new Mover[numMovers];
 
 
-Attractor a;
+
 
 
 
 void setup() {
-  size(800, 400);
-  m = new Mover(10, width/2 + 30, height/2 + 30);
-  a = new Attractor();
-  
+  size(800, displayHeight - 50);
+  for (int i = 0; i < movers.length; i++) {
+    movers[i] = new Mover(random(1, 5), random(width), 0);
+  }
 }
 
 
 void draw() {
   background(255);  
-  
-  PVector force = a.attract(m);
-  m.applyForce(force);
-  m.update();
-  
-  a.display();
-  m.display();
-  
-  
-  
-}
 
 
+  for (int i = 0; i < movers.length; i++) {
+    for (int j = 0; j < movers.length; j++) {
+      if(i != j){
+      PVector force = movers[j].attract(movers[i]);
+      movers[i].applyForce(force);
+      }
+    }
+      PVector gravity = new PVector(0, 0.01);
+      movers[i].applyForce(gravity);
+      movers[i].checkEdges();
+      movers[i].update();
+      movers[i].display();
+    }
+  }
 
