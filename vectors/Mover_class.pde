@@ -6,18 +6,19 @@ class Mover {
 
 
   Mover(float m, float x, float y) {
-
-    location = new PVector(x, y);
-    velocity = new PVector(0.01, 0);
-    acceleration = new PVector(0, 0);
     mass = m;
-   
+    location = new PVector(x, y);
+    velocity = new PVector(0, 0);
+    acceleration = new PVector(0, 0);
   }
+
+
 
   void applyForce(PVector force) {
-    PVector f = force.div(force,mass);
+    PVector f = force.div(force, mass);
     acceleration.add(f);
   }
+
 
 
   void update() {
@@ -34,20 +35,10 @@ class Mover {
   }
 
   void checkEdges() {
-    if (location.x > width) {
-      location.x = width;
-      velocity.x *=  -1;
-    } 
-    else if (location.x < 0) {
-      velocity.x *= -1;
-      location.x = 0;
-      
-    }
-
+    
     if (location.y > height) {
       velocity.y *= -1;
       location.y = height;
-      
     }
   }
 }

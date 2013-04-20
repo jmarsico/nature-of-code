@@ -1,45 +1,52 @@
-int numMovers = 100;
+int numMovers = 10;
+
 
 Mover[] movers = new Mover[numMovers];
 
-PVector wind;
+Liquid liquid;
+
+
 
 
 void setup() {
-  size(640, 360);
-  for (int i = 0; i < movers.length; i ++) {
-    movers[i] = new Mover(random(1, 5), random(0, width-1), 0);
-  }
+  size(800, 200);
+  reset();
+  liquid = new Liquid(0, height/2, width, height/2, 0.1);
+  
 }
 
 
 void draw() {
-
   background(255);  
-  
+  liquid.display();
+
+
   //apply forces to objects
   for (int i = 0; i < movers.length; i++) {
-    PVector wind = new PVector(0.01, 0);
-    float m = movers[i].mass;
-    PVector gravity = new PVector(0, 0.1*m);
-   
 
-    //this is the coefficient of friction; lower c = less friction
-    float c = 0.05;
+    if (liquid.contains(movers[i])) {
+      PVector dragForce = liquid.drag(movers[i]);
+      movers[i].applyForce(dragForce);
+    }
 
-    // friction = -1*direction of velocity*"coefficient of friection"
-    PVector friction = movers[i].velocity.get();
-    friction.normalize();
-    friction.mult(-1);
-    friction.mult(c);
-   
-    
-    movers[i].applyForce(friction);
-    movers[i].applyForce(wind);
+
+
+    float m = 0.1*movers[i].mass;
+    PVector gravity = new PVector(0, m);
     movers[i].applyForce(gravity);    
     movers[i].update();
     movers[i].display();
     movers[i].checkEdges();
   }
+}
+
+void mousePressed() {
+  reset();
+}
+
+void reset() {
+  for (int i = 0; i < movers.length; i++) {
+    movers[i] = new Mover(random(0.5, 3), random(width), 0);
   }
+}
 
