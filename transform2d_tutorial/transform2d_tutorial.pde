@@ -1,17 +1,16 @@
 void setup(){
-  size(400, 200);
+  size(400, 400);
   background(255);
- for (int i = 10; i < 350; i += 50){
-   house(i, 20);
- }
+  noStroke();
 }
-  
-  
-void house(int x, int y){
-  pushMatrix();
-  translate(x, y);
-  triangle(15, 0, 0, 15, 30, 15);
-  rect(0, 15, 30, 30);
-  rect(12, 30, 10, 15);
-  popMatrix();
+
+void draw(){
+  if (frameCount % 10 == 0) {
+    fill(frameCount *3 % 255, frameCount * 5 %255, frameCount * 7 % 255, 200);
+    pushMatrix();
+    translate(100, 100);
+    rotate(radians(frameCount * 5 % 360));
+    rect( 0, 0, 80, 5);
+    popMatrix();
+  }
 }
