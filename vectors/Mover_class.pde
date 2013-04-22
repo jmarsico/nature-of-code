@@ -41,11 +41,12 @@ class Mover {
   void display() {
     stroke(0);
     fill(134, 201, 30, 150);
-    rectMode(CENTER);
+    float angle = atan(velocity.y/velocity.x);
     pushMatrix();
+    rectMode(CENTER);
     translate(location.x, location.y);
     rotate(angle);
-    rect(0, 0, mass *16, mass*16);
+    rect(0, 0, 30, 10);
     popMatrix();
   }
 
