@@ -30,18 +30,24 @@ class Mover {
 
     velocity.add(acceleration);
     location.add(velocity);
-    
+
     aAcceleration = acceleration.x;
     aVelocity += aAcceleration;
     angle = aVelocity;
-    
+
     acceleration.mult(0);
   }
 
   void display() {
+
+    //this is what makes the rectangle point in the direction of velocity
+    float angle = velocity.heading();
+
+
     stroke(0);
     fill(134, 201, 30, 150);
-    float angle = atan(velocity.y/velocity.x);
+
+
     pushMatrix();
     rectMode(CENTER);
     translate(location.x, location.y);
