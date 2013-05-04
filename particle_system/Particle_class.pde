@@ -8,7 +8,7 @@ class Particle {
   Particle(PVector l) {
     location = l.get();
     acceleration = new PVector(0, 0);
-    velocity = new PVector(0,0);
+    velocity = new PVector(random(-1,1),0);
     lifespan = 255;
   }
 

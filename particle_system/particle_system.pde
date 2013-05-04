@@ -1,33 +1,28 @@
 //must import "Iterator" class for processing 2.0
 import java.util.Iterator;
-ArrayList<ParticleSystem> systems;
+ParticleSystem ps;
+Repeller repeller;
 
 
 
 void setup() {
-  size(400, 800);
-  systems = new ArrayList<ParticleSystem>();;
-  
+  size(400, 400);
+  ps = new ParticleSystem(new PVector(width/2, height/2 - 50));
+  repeller = new Repeller(width/2, height/2);
 }
 
-void mousePressed() {
-  systems.add(new ParticleSystem(new PVector(mouseX, mouseY)));
-}
+
 
 void draw() {
   background(255);
-  for(ParticleSystem ps: systems) {
-  PVector gravity =  new PVector (0,0.1);
-  ps.applyForce(gravity);
   ps.addParticle();
+  PVector gravity =  new PVector (0, 0.1);
+  ps.applyForce(gravity);
+  ps.applyRepeller(repeller);
   ps.run();
-  }
- 
-
-  //iterator is safer than "for loop" when working with arrayList
-  
+  repeller.display();
 }
 
 
-
+//iterator is safer than "for loop" when working with arrayList
 
