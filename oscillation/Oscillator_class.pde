@@ -5,9 +5,9 @@ class Oscillator {
   
   Oscillator(){
     angle = new PVector();
-    velocity = new PVector(random(-0.05, 0.05), random(-0.05, 0.05));
+    velocity = new PVector(random(-0.04, 0.04), random(-0.04, 0.04));
     
-    amplitude = new PVector(random(width/2), random(height,2));
+    amplitude = new PVector(random(width/3), random(height/3));
   }
   
   void oscillate(){
@@ -22,7 +22,7 @@ class Oscillator {
     translate(width/2, height/2);
     stroke(0);
     fill(175);
-    line(x,y,x,y);
+    line(0,0,x,y);
     ellipse(x,y,16,16);
     popMatrix();
   }
