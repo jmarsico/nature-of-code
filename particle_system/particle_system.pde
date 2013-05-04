@@ -1,22 +1,26 @@
 int total = 10;
 
-ArrayList<Particle> plist = new ArrayList<Particle>();
+ArrayList<Particle>  particles;
 
-void setup(){
+void setup() {
   size(400, 400);
-  for (int i = 0; i < total; i++) {
-    plist.add(new Particle(new PVector (width/2,10)));
-  }
+  particles = new ArrayList<Particle>();
+
 }
 
-void draw(){
+void draw() {
   background(255);
-  for (int i = 0; i < plist.size(); i++) {
-    Particle p = plist.get(i);
+  particles.add(new Particle(new PVector(width/2, 50)));
+  
+  for (int i = 0; i < particles.size(); i++) {
+    Particle p = particles.get(i);
     p.run();
+    
+    if (p.isDead()){
+      particles.remove(i);
+    }
   }
 }
-
 
 
 
