@@ -7,7 +7,10 @@ import java.util.Iterator;
 import tsps.*;
 TSPS tspsReceiver;
 
-Attractor attractor;
+int maxPeople= 10;
+int numRepellers = 110;
+
+Attractor[] attractors = new Attractor[maxPeople];
 ArrayList<Repeller> repellers;
 
 VerletPhysics2D physics;
@@ -21,8 +24,12 @@ void setup() {
   physics.setDrag(0.01);
   physics.setWorldBounds(new Rect(0, 0, width, height));
   repellers = new ArrayList<Repeller>();
+  
+  for(int i = 0; i<attractors.length; i++){
+    attractors[i] = new Attractor(new Vec2D(0,0));
+  }
 
-  for (int i = 0; i < 110; i++) {
+  for (int i = 0; i < numRepellers; i++) {
     repellers.add(new Repeller(new Vec2D(random(width), random(height))));
   }
 }
@@ -36,9 +43,18 @@ void draw() {
   for (int i=0; i<people.length; i++) {
     // get person
     TSPSPerson person = people[i];
-    attractor = new Attractor(new Vec2D(person.centroid.x * width, person.centroid.y*height));
-attractor.display();
+    attractors[i].setVector(new Vec2D(person.centroid.x * width, person.centroid.y *height));
+    attractors[i].display();
+    attractors[i].setPhysics();
   }
+  
+  if(people.length > 0){
+  for (int i =people.length; i < attractors.length; i++){
+    attractors[i].removePhysics();
+  }
+  }
+
+  
 
 
       for (Repeller r: repellers) {
