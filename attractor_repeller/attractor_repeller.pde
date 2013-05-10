@@ -43,7 +43,8 @@ void draw() {
   for (int i=0; i<people.length; i++) {
     // get person
     TSPSPerson person = people[i];
-    attractors[i].setVector(new Vec2D(person.centroid.x * width, person.centroid.y *height));
+    attractors[i].lock();
+    attractors[i].set(person.centroid.x * width, person.centroid.y *height);
     attractors[i].display();
     attractors[i].setPhysics();
   }
